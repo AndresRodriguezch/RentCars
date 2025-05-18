@@ -13,7 +13,6 @@
 -   composer install
 -   cp .env.example .env
 -   php artisan key:generate
--   cp .env.example .env
 -   php artisan serve
 
 ## Comandos para limpiar las configuraciones del proyecto

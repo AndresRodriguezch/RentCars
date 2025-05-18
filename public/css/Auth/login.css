@@ -1,0 +1,9 @@
+.bg-right {
+    height: 100dvh;
+    background: #f4ff29;
+    background: linear-gradient(
+        253deg,
+        rgba(244, 255, 41, 1) 0%,
+        rgba(255, 133, 25, 1) 100%
+    );
+}

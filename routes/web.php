@@ -1,7 +1,18 @@
 <?php
 
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('Auth.login');
+})->name('login.form');
+Route::post('/login', [UsuarioController::class, 'iniciar_sesion'])->name('login.validar');
+
+Route::get('/registro', [UsuarioController::class, 'mostrar_formulario_registro'])->name('usuario.registrar.form');
+Route::post('/registro', [UsuarioController::class, 'registrar_usuario'])->name('usuario.registrar.guardar');
+
+Route::post('/logout', [UsuarioController::class, 'cerrar_sesion'])->name('logout');
+
+Route::get('/home', function () {
+    return view('Home.home');
+})->name('home');
