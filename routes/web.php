@@ -15,4 +15,4 @@ Route::post('/logout', [UsuarioController::class, 'cerrar_sesion'])->name('logou
 
 Route::get('/home', function () {
     return view('Home.home');
-})->name('home');
+})->middleware('auth')->name('home');

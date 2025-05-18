@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tipoIdentificacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\usuario;
 
 class UsuarioController extends Controller
@@ -73,13 +74,13 @@ class UsuarioController extends Controller
             'id_tipo_identificacion' => $request->id_tipo_identificacion,
             'identificacion' => $request->identificacion,
             'email' => $request->email,
-            'contrasena' => Hash::make($request->contrasena),
+            'password' => Hash::make($request->contrasena),
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'id_rol' => 2,
         ]);
 
-        return redirect()->route('login.form')->with('success', 'Usuario creado correctamente');
+        return redirect()->route('login.form')->with('success', 'Usuario creado correctamente.');
     }
 
     public function iniciar_sesion(Request $request)
@@ -94,20 +95,26 @@ class UsuarioController extends Controller
             'contrasena.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ]);
 
-        $usuario = Usuario::where('email', $request->email)->first();
+        $credenciales = [
+            'email' => $request->email,
+            'password' => $request->contrasena,
+        ];
 
-        if (!$usuario || !Hash::check($request->contrasena, $usuario->contrasena)) {
-            return back()->with('error', 'Credenciales incorrectas')->withInput();
+        if (Auth::attempt($credenciales)) {
+            $request->session()->regenerate();
+            return redirect()->route('home')->with('success', 'Inicio de sesión exitoso.');
         }
 
-        session(['usuario_id' => $usuario->id_usuarios]);
-
-        return redirect()->route('home')->with('success', 'Inicio de sesión exitoso');
+        return back()->with('error', 'Credenciales incorrectas')->withInput();
     }
 
-    public function cerrar_sesion()
+    public function cerrar_sesion(Request $request)
     {
-        session()->forget('usuario_id');
-        return redirect()->route('login.form')->with('success', 'Sesión cerrada correctamente');
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.form')->with('success', 'Sesión cerrada correctamente.');
     }
 }

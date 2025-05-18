@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tipo_identificacion');
             $table->string('identificacion')->unique();
             $table->string('email')->unique();
-            $table->string('contrasena');
+            $table->string('password');
             $table->string('telefono');
             $table->string('direccion');
             $table->unsignedBigInteger('id_rol');

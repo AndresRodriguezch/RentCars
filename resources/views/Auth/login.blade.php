@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-4 has-validation">
+                            <div class="mb-1 has-validation">
                                 <div class="input-group">
                                     <div class="form-floating">
                                         <input type="password" name="contrasena" value="{{ old('contrasena') }}"
@@ -62,6 +62,10 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                            <div class="mb-4">
+                                <p><a class="ms-2" href="{{ route('usuario.registrar.form') }}">¿No tienes cuenta?
+                                        Registrate aqui</a></p>
                             </div>
 
                             <div class="mb-1 text-center">

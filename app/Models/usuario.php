@@ -3,17 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 Use App\Models\tipoIdentificacion;
+Use App\Models\rol;
 
-class usuario extends Model
+class usuario extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UsuarioFactory> */
     use HasFactory;
 
     protected $primaryKey = 'id_usuarios';
+    protected $table = 'usuarios';
+    public $timestamps = false;
 
     protected $fillable = [
         'nombre1',
@@ -23,10 +26,14 @@ class usuario extends Model
         'id_tipo_identificacion',
         'identificacion',
         'email',
-        'contrasena',
+        'password',
         'telefono',
         'direccion',
         'id_rol'
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     public function tipoIdentificacion(): BelongsTo
@@ -34,4 +41,8 @@ class usuario extends Model
         return $this->belongsTo(tipoIdentificacion::class);
     }
 
+    public function rol(): BelongsTo
+    {
+        return $this->belongsTo(rol::class);
+    }
 }

@@ -22,7 +22,18 @@
             <div class="col-md-6">
                 <div class="row mt-5">
                     <div class="col-md-11 mb-4 mx-auto">
-                        <h1 class="text-center mb-4">Registrarse</h1>
+                        <div class="row">
+                            <div class="col-md-1 pt-3">
+                                <a class="text-decoration-none text-black" href="{{ route('login.form') }}"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Regresar">
+                                    <i class="fa-solid fa-circle-chevron-left fa-lg"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10">
+                                <h1 class="text-center mb-4">Registrarse</h1>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
                         <form method="POST" action="{{ route('usuario.registrar.guardar') }}">
                             @csrf {{-- Evitar errores de seguridad --}}
 
@@ -102,7 +113,7 @@
 
                             {{-- Tipo Identificacion / Identificacion --}}
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3 mb-md-0">
                                     <div class="form-floating">
                                         <select required name="id_tipo_identificacion"
                                             class="form-select
@@ -265,6 +276,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                tooltipTriggerEl))
+
             const toastEl = document.getElementById('liveToast');
             if (toastEl) {
                 const toast = new bootstrap.Toast(toastEl, {

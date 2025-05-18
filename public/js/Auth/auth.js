@@ -1,10 +1,14 @@
-document.getElementById("txtTelefono").addEventListener("input", function (e) {
-    const valor = e.target.value;
+const telefonoInput = document.getElementById("txtTelefono");
 
-    if (valor.length > 15) {
-        e.target.value = valor.slice(0, 15);
-    }
-});
+if (telefonoInput) {
+    telefonoInput.addEventListener("input", function (e) {
+        const valor = e.target.value;
+
+        if (valor.length > 15) {
+            e.target.value = valor.slice(0, 15);
+        }
+    });
+}
 
 function btn_password() {
     let input = document.getElementById("input-password");
