@@ -7,13 +7,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Comandos para instalar los paquetes de Laravel
+## Comandos para instalar los paquetes de Laravel e inicializar el proyecto RentCars
 
--   ¡Importante configurar el php-ini a GDCS!
+-   ¡Importante configurar el php-ini a GDCS y habilitar la extension zip!
 -   composer install
 -   cp .env.example .env
 -   php artisan key:generate
+-   php artisan migrate
+-   php artisan db:seed
 -   php artisan serve
+
+## Comandos para reestablecer la base de datos
+
+-   php artisan migrate:rollback
 
 ## Comandos para limpiar las configuraciones del proyecto
 
