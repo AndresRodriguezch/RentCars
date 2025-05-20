@@ -1,0 +1,10 @@
+.btn-accion {
+    width: 40px;
+    height: 40px;
+}
+
+@media (min-width: 991px) {
+    .table-responsive {
+        overflow-x: hidden !important;
+    }
+}

@@ -24,7 +24,7 @@
                     <div class="col-md-11 mb-4 mx-auto">
                         <div class="row">
                             <div class="col-md-1 pt-3">
-                                <a class="text-decoration-none text-black" href="{{ route('login.form') }}"
+                                <a class="text-decoration-none text-black" href="{{ route('login') }}"
                                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Regresar">
                                     <i class="fa-solid fa-circle-chevron-left fa-lg"></i>
                                 </a>

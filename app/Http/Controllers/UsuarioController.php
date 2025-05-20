@@ -21,6 +21,21 @@ class UsuarioController extends Controller
         return view('Auth.login');
     }
 
+    public function listar_usuarios()
+    {
+        return view('Users.listaUsuarios', [
+            'usuarios' => usuario::all()
+        ]);
+    }
+
+    public function eliminar_usuario($id)
+    {
+        $usuario = usuario::findOrFail($id);
+        $usuario->delete();
+
+        return back()->with('success', 'Usuario eliminado correctamente');
+    }
+
     public function registrar_usuario(Request $request)
     {
         $request->validate([
@@ -80,7 +95,7 @@ class UsuarioController extends Controller
             'id_rol' => 2,
         ]);
 
-        return redirect()->route('login.form')->with('success', 'Usuario creado correctamente.');
+        return redirect()->route('login')->with('success', 'Usuario creado correctamente.');
     }
 
     public function iniciar_sesion(Request $request)
@@ -115,6 +130,6 @@ class UsuarioController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login.form')->with('success', 'Sesión cerrada correctamente.');
+        return redirect()->route('login')->with('success', 'Sesión cerrada correctamente.');
     }
 }

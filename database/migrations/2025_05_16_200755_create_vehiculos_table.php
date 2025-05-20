@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('placa');
             $table->unsignedBigInteger('id_tipo_vehiculo');
             $table->unsignedBigInteger('id_propietario');
-            $table->double('valor_monto');
+            $table->double('valor_coche');
+            $table->string('imagen');
             $table->boolean('disponible');
             $table->foreign('id_tipo_vehiculo')->references('id_tipo_vehiculos')->on('tipo_vehiculos');
             $table->foreign('id_propietario')->references('id_propietarios')->on('propietarios');
