@@ -21,6 +21,6 @@ class propietario extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(usuario::class);
+        return $this->belongsTo(usuario::class, 'id_usuario');
     }
 }
