@@ -25,31 +25,64 @@
         </div>
 
         @if (session('success') || session('error'))
-            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-                <div id="liveToast"
-                    class="toast align-items-center text-white {{ session('success') ? 'bg-success' : 'bg-danger' }} border-0"
-                    role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            {{ session('success') ?? session('error') }}
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"></button>
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+            <div id="liveToast"
+                class="toast align-items-center text-white {{ session('success') ? 'bg-success' : 'bg-danger' }} border-0"
+                role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('success') ?? session('error') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        @endif
+    </div>
+
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Vehículos disponibles</h1>
+        <div class="row">
+            @foreach($vehiculos as $vehiculo)
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    {{-- Imagen del vehículo --}}
+                    @if($vehiculo->imagen)
+                    <img src="{{ $vehiculo->imagen }}" class="card-img-top"
+                        alt="Imagen de {{ $vehiculo->marca }} {{ $vehiculo->modelo }}"
+                        style="height: 200px; object-fit: cover;">
+                    @else
+                    <img src="https://via.placeholder.com/400x200?text=Sin+Imagen" class="card-img-top" alt="Sin imagen"
+                        style="height: 200px; object-fit: cover;">
+                    @endif
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $vehiculo->marca }} {{ $vehiculo->modelo }}</h5>
+                        <p class="card-text">
+                            <strong>Placa:</strong> {{ $vehiculo->placa }}<br>
+                            <strong>Tipo:</strong> {{ $vehiculo->tipoVehiculo->descripcion ?? 'N/A' }}<br>
+                            <strong>Propietario:</strong> {{ $vehiculo->propietario->usuario->nombre1 ?? 'N/A' }}<br>
+                            <strong>Valor:</strong> ${{ number_format($vehiculo->valor_coche, 2) }}<br>
+                            <strong>Disponible:</strong> {{ $vehiculo->disponible ? 'Sí' : 'No' }}
+                        </p>
                     </div>
                 </div>
             </div>
-        @endif
+            @endforeach
+        </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const toastEl = document.getElementById('liveToast');
-            if (toastEl) {
-                const toast = new bootstrap.Toast(toastEl, {
-                    delay: 3000
-                });
-                toast.show();
-            }
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const toastEl = document.getElementById('liveToast');
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 3000
+            });
+            toast.show();
+        }
+    });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
