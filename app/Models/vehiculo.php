@@ -28,11 +28,11 @@ class vehiculo extends Model
 
     public function tipoVehiculo(): BelongsTo
     {
-        return $this->belongsTo(tipoVehiculo::class);
+        return $this->belongsTo(tipoVehiculo::class, 'id_tipo_vehiculo');
     }
 
     public function propietario(): BelongsTo
     {
-        return $this->belongsTo(propietario::class);
+        return $this->belongsTo(propietario::class, 'id_propietario');
     }
 }
