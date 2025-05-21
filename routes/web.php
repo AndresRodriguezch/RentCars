@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Route;
 // Ruta raíz ('/') que verifica si el usuario está autenticado.
 // Si está autenticado, redirige a /home, si no, muestra el formulario de login.
 Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect()->route('home');
-    }
     return view('Auth.login');
 })->name('login');
 

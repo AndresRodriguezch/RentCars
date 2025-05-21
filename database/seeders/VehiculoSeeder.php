@@ -9,7 +9,7 @@ class VehiculoSeeder extends Seeder
 {
     public function run()
     {
-        $vehiculos = [
+         $vehiculos = [
             [
                 'marca' => 'Toyota',
                 'modelo' => 'Corolla',
@@ -35,7 +35,7 @@ class VehiculoSeeder extends Seeder
                 'modelo' => 'F-150',
                 'placa' => 'LMN-456',
                 'id_tipo_vehiculo' => 2,
-                'id_propietario' => 3,
+                'id_propietario' => 1,
                 'valor_coche' => 25000.00,
                 'disponible' => true,
                 'imagen' => 'https://i.pinimg.com/736x/dc/20/b1/dc20b1906e65b9014ab8a00561b8ba0a.jpg',
@@ -45,7 +45,7 @@ class VehiculoSeeder extends Seeder
                 'modelo' => 'Malibu',
                 'placa' => 'JKL-234',
                 'id_tipo_vehiculo' => 1,
-                'id_propietario' => 1,
+                'id_propietario' => 2,
                 'valor_coche' => 17000.00,
                 'disponible' => true,
                 'imagen' => 'https://i.pinimg.com/736x/48/cd/8a/48cd8a3bc3eeb856eff608998d510e52.jpg',
@@ -53,7 +53,10 @@ class VehiculoSeeder extends Seeder
         ];
 
         foreach ($vehiculos as $vehiculo) {
-            Vehiculo::create($vehiculo);
+            Vehiculo::firstOrCreate(
+                ['placa' => $vehiculo['placa']], // campos únicos
+                $vehiculo                       // valores completos
+            );
         }
     }
 }
